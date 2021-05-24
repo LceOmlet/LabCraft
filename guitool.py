@@ -27,7 +27,8 @@ class App(tk.Frame):
             utterance.append(a["sentence"])
         self.corpus_pointer += 1
         if len(utterance) > 1:
-            self.utterances.append(utterance)
+            self.current_item["history"] = utterance
+            self.utterances.append(self.current_item.copy())
             if(self.pointer_position < len(self.acceptive_queue)):
                 self.utterances_del_counter += 1
                 self.corpus_pointer -= 1
@@ -69,7 +70,8 @@ class App(tk.Frame):
             tk.Label(f, text="你整完了所有的数据集!", fg='red',height=3,width=100, font=self.font).pack()
             f.pack()
             return
-        utterance = self.corpus[self.corpus_pointer]
+        utterance = self.corpus[self.corpus_pointer]["history"]
+        self.current_item = self.corpus[self.corpus_pointer]
         self.converLength = len(utterance)
         for i in range(self.converLength):
             a = tk.E if (self.converLength - i)%2 == 0 else tk.W
@@ -118,7 +120,7 @@ class App(tk.Frame):
     def save_all(self):
         self.save_file.seek(0)
         self.save_file.truncate()
-        self.save_file.write(json.dumps(self.utterances, ensure_ascii=False))
+        self.save_file.write(json.dumps(self.utterances,indent=2, ensure_ascii=False))
         self.save_file.flush()
         
     def begin(self):
