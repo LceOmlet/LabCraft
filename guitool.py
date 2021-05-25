@@ -28,6 +28,7 @@ class App(tk.Frame):
         self.corpus_pointer += 1
         if len(utterance) > 1:
             self.current_item["history"] = utterance
+            self.current_item["num"] = self.corpus_pointer
             self.utterances.append(self.current_item.copy())
             if(self.pointer_position < len(self.acceptive_queue)):
                 self.utterances_del_counter += 1
