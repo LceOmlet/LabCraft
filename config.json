@@ -1,5 +1,5 @@
 {
     "intorduction for source file":"Write your raw data set path here, which is formated [{\"history\":[u11, u12, u13]},{\"history\":[u21, u22]},{},...], where u for utterance.",
-    "source":"./dataset.json", 
+    "source":"./parsed_psyd.json", 
     "target":"./result.json"
 }
